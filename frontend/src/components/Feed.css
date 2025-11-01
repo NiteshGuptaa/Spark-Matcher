@@ -1,0 +1,71 @@
+/* Feed.css */
+.feed-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+    width: 100%;
+    /* overflow: hidden; Prevent scrollbars */
+  }
+  
+  .user-card-wrapper {
+    /* position: absolute; */
+    transition: transform 0.3s ease, opacity 0.3s ease, filter 0.3s ease;
+    width: 20%; /* Adjust based on your card width */
+  }
+  
+  .active-card {
+    z-index: 2;
+    transform: scale(1);
+    opacity: 1;
+    filter: none;
+    left: 50%;  
+    transform: translateX(-50%); 
+    position: absolute
+  }
+  
+  .prev-card,
+  .next-card {
+    opacity: 0.5;
+    transform: scale(0.8);
+    z-index: 1;
+    filter: blur(1px);
+  }
+  
+  /* Position previous cards */
+  .prev-card:nth-child(1) {
+    left: 10%;
+  }
+  .prev-card:nth-child(2) {
+    left: 20%;
+  }
+  .prev-card:nth-child(3) {
+    left: 30%;
+  }
+  
+  /* Position next cards */
+  .next-card:nth-child(1) {
+    right: 10%;
+  }
+  .next-card:nth-child(2) {
+    right: 20%;
+  }
+  .next-card:nth-child(3) {
+    right: 30%;
+  }
+  
+  /* Hide partial previews on mobile screens */
+  @media (max-width: 768px) {
+    .prev-card,
+    .next-card {
+      display: none;
+    }
+  
+    .active-card {
+      width: 100%;
+      max-width: 300px;
+      height: 100%;
+      margin-top: 4vh;
+    }
+  }
