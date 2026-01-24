@@ -159,8 +159,10 @@ const Signup = () => {
                 return navigate("/"); // This line should work if no errors occurred
             }
             catch (err) {
-                // console.log('Login Error:', err);
-                setError(err?.response?.data || "something went wrong")
+                console.log('Signup Error:', err);
+                const errorMessage = err?.response?.data || "Signup failed. Please try again.";
+                toast.error(errorMessage);
+                setError(errorMessage);
             }
         }
 

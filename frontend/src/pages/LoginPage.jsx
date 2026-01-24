@@ -88,6 +88,7 @@ import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/useAuthStore';
+import  toast  from 'react-hot-toast';
 
 import { Link } from "react-router-dom";
 import { Eye, EyeOff, Loader2, Lock, Mail, MessageSquare } from "lucide-react";
@@ -95,8 +96,8 @@ import { BASE_URL } from '../utils/constants';
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [emailId, setEmailId] = useState("abhi@gmail.com");
-  const [password, setPassword] = useState("Abhi@123");
+  const [emailId, setEmailId] = useState("elon@gmail.com");
+  const [password, setPassword] = useState("Elon@123");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [error, setError] = useState("");
@@ -127,8 +128,10 @@ const LoginPage = () => {
           return navigate("/");
       }
       catch (err) {
-          // console.log('Login Error:', err);
-          setError(err?.response?.data || "something went wrong")
+          console.log('Login Error:', err);
+          const errorMessage = err?.response?.data || "Invalid credentials. Please check your email and password.";
+          toast.error(errorMessage);
+          setError(errorMessage);
       }
   };
 

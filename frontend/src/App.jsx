@@ -13,6 +13,7 @@ import SettingsPage from './pages/SettingsPage'
 import { useThemeStore } from './store/useThemeStore'
 import LoginPage from './pages/LoginPage'
 import { useAuthStore } from './store/useAuthStore';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -43,6 +44,7 @@ function App() {
 
               </Route>
             </Routes>
+            <Toaster />
           </div>
 
         </BrowserRouter>
