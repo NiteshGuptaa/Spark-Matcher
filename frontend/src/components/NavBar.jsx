@@ -37,7 +37,7 @@ const NavBar = () => {
         <div className="flex-1">
           <Link to="/" className="btn btn-ghost text-xl">
             <img className='w-[40px]' src={logo} alt="logo image" />
-            <h3>SparkMathcer</h3>
+            <h3>SparkMatcher</h3>
           </Link>
         </div>
         {user && 
@@ -72,8 +72,8 @@ const NavBar = () => {
         }
         {!user &&
             <div className='flex gap-2'>
-              <Link to="/signup">SingUP</Link>
-              <Link to="/login-page" >login</Link>
+              <Link to="/signup">Sing UP</Link>
+              <Link to="/login-page" >Log in</Link>
             </div>
         }
       </div>

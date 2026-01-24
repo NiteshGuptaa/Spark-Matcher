@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addFeed } from '../utils/feedSlice';
 import UserCard from './UserCard';
 import { useSwipeable } from 'react-swipeable';
+import {useNavigate} from 'react-router-dom';
 import './Feed.css';
 
 const Feed = () => {
@@ -12,6 +13,7 @@ const Feed = () => {
   const feed = useSelector((store) => store.feed);
   const user = useSelector((store) => store.user);
   const [index, setIndex] = useState(0);
+  const navigate = useNavigate()
 
   const getFeed = async () => {
     try {
@@ -41,11 +43,11 @@ const Feed = () => {
     setIndex((prev) => (prev === 0 ? feed.length - 1 : prev - 1));
   };
 
-  if (!user) return (
-    <div className='flex justify-center items-center h-screen text-xl'>
-      Please login to view feed
-    </div>
-  );
+  if (!user)
+      return navigate("/login-page")
+    // <div className='flex justify-center items-center h-screen text-xl'>
+    //   Please login to view feed
+    // </div>
   
   if (!feed || feed.length === 0) return (
     <div className='flex justify-center items-center h-screen text-xl'>
