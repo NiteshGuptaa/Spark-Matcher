@@ -1,26 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { BASE_URL } from '../utils/constants';
-import { useDispatch, useSelector } from 'react-redux';
-import { addFeed } from '../utils/feedSlice';
-import UserCard from './UserCard';
-import { useSwipeable } from 'react-swipeable';
-import {useNavigate} from 'react-router-dom';
-import './Feed.css';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { BASE_URL } from "../utils/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { addFeed } from "../utils/feedSlice";
+import UserCard from "./UserCard";
+import { useSwipeable } from "react-swipeable";
+import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "./LoadingSpinner";
+import "./Feed.css";
 
 const Feed = () => {
   const dispatch = useDispatch();
   const feed = useSelector((store) => store.feed);
   const user = useSelector((store) => store.user);
   const [index, setIndex] = useState(0);
-  const navigate = useNavigate()
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const getFeed = async () => {
     try {
-      const res = await axios.get(BASE_URL + '/feed', { withCredentials: true });
+      setLoading(true);
+      const res = await axios.get(BASE_URL + "/feed", {
+        withCredentials: true,
+      });
       dispatch(addFeed(res?.data?.data));
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -43,17 +50,16 @@ const Feed = () => {
     setIndex((prev) => (prev === 0 ? feed.length - 1 : prev - 1));
   };
 
-  if (!user)
-      return navigate("/login-page")
-    // <div className='flex justify-center items-center h-screen text-xl'>
-    //   Please login to view feed
-    // </div>
-  
-  if (!feed || feed.length === 0) return (
-    <div className='flex justify-center items-center h-screen text-xl'>
-      No more new users left
-    </div>
-  );
+  if (!user) return navigate("/login-page");
+
+  if (loading) return <LoadingSpinner message="Finding new users for you..." />;
+
+  if (!feed || feed.length === 0)
+    return (
+      <div className="flex justify-center items-center h-screen text-xl">
+        No more new users left
+      </div>
+    );
 
   return (
     <div className="feed-container" {...handlers}>

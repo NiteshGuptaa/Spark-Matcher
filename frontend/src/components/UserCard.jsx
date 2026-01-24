@@ -108,7 +108,7 @@ const UserCard = ({ user, setIndex }) => {
 
     {sendFromEditProfile && (
       <p>
-        <span className="text-purple-600">skills: </span>
+        <span className="text-purple-600">Skills: </span>
         {skills.length === 0 ? "" : skills.join(", ")}
       </p>
     )}
