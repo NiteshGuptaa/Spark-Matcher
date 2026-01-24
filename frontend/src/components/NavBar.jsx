@@ -13,13 +13,13 @@ import logo from '../assets/logo.jpg';
 const NavBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector((store)=> store.user);
+  const user = useSelector((store) => store.user);
   // console.log(user);
   const {disconnectSocket} = useAuthStore();
 
-  const handleLogout = async ()=>{
+  const handleLogout = async () => {
     try{
-      const res = await axios.post(BASE_URL + "/logout",  {}, {withCredentials : true});
+      const res = await axios.post(BASE_URL + "/logout",  {}, { withCredentials : true });
       console.log(res);
       disconnectSocket();
       dispatch(removeUser());
@@ -42,10 +42,10 @@ const NavBar = () => {
         </div>
         {user && 
           <div className="flex-none gap-2">
-{/*             <div>Welcome, {user.firstName}</div> */}
+            <div>Welcome {user.firstName}</div>
             <div className="dropdown dropdown-end">
-              <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                <div className="w-10 rounded-full">
+              <div tabIndex={0} role="button" className="mr-4 btn btn-ghost btn-circle avatar">
+                <div className="w-12 rounded-full">
                   <img
                     alt="Tailwind CSS Navbar component"
                     src={user.photoUrl} />
