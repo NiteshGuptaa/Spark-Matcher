@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToRequests, removeFromRequests } from "../utils/requestSlice";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import LoadingSpinner from "./LoadingSpinner";
+import LoadingSpinner from './LoadingSpinner';
 
 const Requests = () => {
   const requests = useSelector((store) => store.requests);
@@ -12,23 +12,24 @@ const Requests = () => {
   const [loading, setLoading] = useState(true);
   console.log(requests);
 
-  const reviewRequest = async (status, fromUserId, _id) => {
+  const reviewRequest = async (status,fromUserId,  _id) => {
     console.log(_id);
     try {
       const res = axios.post(
         BASE_URL + "/request/review/" + status + "/" + fromUserId,
         {},
-        { withCredentials: true },
+        { withCredentials: true }
       );
       console.log(res);
-      res.then((result) => {
-        if (result.status === 200) dispatch(removeFromRequests(_id));
-        else toast.error(result.message);
-      });
+      res.then((result)=>{
+        if(result.status === 200)
+          dispatch(removeFromRequests(_id));
+        else  toast.error(result.message);
+      }) 
     } catch (err) {
       toast.error(err.message);
 
-      console.log("error in reviewRequest-  ", err);
+      console.log("error in reviewRequest-  ", err)
     }
   };
 
@@ -39,7 +40,6 @@ const Requests = () => {
         withCredentials: true,
       });
       console.log(res);
-
       dispatch(addToRequests(res.data.data));
     } catch (err) {
       console.error("Error fetching requests:", err);
@@ -52,14 +52,12 @@ const Requests = () => {
     fetchRequests();
   }, []);
 
+  
+
   if (loading) return <LoadingSpinner message="Loading your requests..." />;
 
-  if (!requests || requests.length === 0)
-    return (
-      <h1 className="flex justify-center items-center min-h-screen pb-10 text-2xl">
-        You have no requests yet!
-      </h1>
-    );
+  if (!requests || requests.length === 0) return <h1 className="flex justify-center items-center min-h-screen pb-10 text-2xl"> You have no requests yet</h1>;
+
   return (
     <div className="text-center my-10">
       <h1 className="text-bold text-white text-3xl">Connection Requests</h1>
@@ -88,15 +86,15 @@ const Requests = () => {
               <p>{about}</p>
             </div>
             <div>
-              <button
+            <button
                 className="btn btn-primary mx-2"
-                onClick={() => reviewRequest("rejected", _id, request._id)}
+                onClick={() => reviewRequest("rejected", _id,  request._id)}
               >
                 Reject
               </button>
               <button
                 className="btn btn-secondary mx-2"
-                onClick={() => reviewRequest("accepted", _id, request._id)}
+                onClick={() => reviewRequest("accepted", _id,  request._id)}
               >
                 Accept
               </button>

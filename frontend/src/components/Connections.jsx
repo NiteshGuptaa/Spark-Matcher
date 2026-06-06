@@ -11,7 +11,7 @@
 //   const navigate = useNavigate();
 //   const connections = useSelector((store) => store.connections);
 //   console.log(connections);
-
+  
 //   const dispatch = useDispatch();
 
 //   const { selectedUser, setSelectedUser} = useChatStore();;
@@ -122,9 +122,7 @@ const Connections = () => {
     fetchConnections();
   }, []);
 
-  if (connections === null)
-    if (loading)
-      return <LoadingSpinner message="Loading your connections..." />;
+  if (loading) return <LoadingSpinner message="Loading your connections..." />;
 
   if (connections === null || connections.length === 0)
     return (
