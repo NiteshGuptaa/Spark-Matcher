@@ -7,7 +7,7 @@ const Profile = () => {
      const user = useSelector(store => store.user);
      const navigate = useNavigate();
      if(!user){
-        return  navigate("/login-page");
+        return  navigate("/login");
      }
    
      return (

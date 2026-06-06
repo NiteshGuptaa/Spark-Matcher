@@ -23,7 +23,7 @@
 //      }
 //      catch(err){
 //         if(err.status === 401){
-//           navigate("/login-page");
+//           navigate("/login");
 //         }
 //         console.log(err);
 //      }
@@ -74,7 +74,7 @@ const Body = () => {
       navigate('/');
     } catch (err) {
       if (err.response?.status === 401) {
-        navigate('/login-page');
+        navigate('/login');
       }
       console.log(err);
     }

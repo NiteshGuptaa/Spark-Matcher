@@ -28,7 +28,7 @@
 //   useEffect(() => {
 //     console.log("authUser = ", authUser);
 //     if (!authUser) {
-//       navigate("/login-page");
+//       navigate("/login");
 //     }
 //   }, [authUser, navigate]);
 
@@ -132,7 +132,7 @@ const ChatContainer = () => {
   // Redirect to login if authUser is null
   useEffect(() => {
     if (!authUser) {
-      navigate("/login-page");
+      navigate("/login");
     }
   }, [authUser, navigate]);
 
