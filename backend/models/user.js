@@ -42,9 +42,9 @@ const userSchema = new mongoose.Schema(
     },
     gender: {
       type: String,
-      lowercase: true,
+      lowercase: true,   // converts input to lowercase automatically
       enum: {
-        values: ["male", "female", "other"],
+        values: ["male", "female", "other",],
         message: `{VALUE} is not a valid gender type`,
       },
       // validate(value) {
